@@ -63,8 +63,7 @@ public:
         switch(command) {
             case 'P' :
             case 'p' :  cout << "playing game" << endl;
-                        myGrid.displayGrid();
-                        eStatus = GameStatus::EXITING;
+                        myGrid.displayGrid(); 
                         break;
                         
             case 'E' :
