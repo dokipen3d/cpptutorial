@@ -11,11 +11,11 @@ using namespace std;
 
 
 
-class gridClass{
+class Grid{
     
 public:
     //constructor
-    gridClass(int inWidthHeight) :  widthHeight(inWidthHeight), 
+    Grid(int inWidthHeight) :  widthHeight(inWidthHeight), 
                                     grid(inWidthHeight*inWidthHeight, 0){}
     
     //wrapping up into a class means we dont need to provide args. it can call itself
@@ -23,10 +23,10 @@ public:
         for (int j = 0; j < widthHeight; ++j){
             for (int i = 0; i < widthHeight; ++i){
                 cout  << grid[Convert2dTo1D(i,j)] << "  ";
-                }
-                         
-                cout << endl;
             }
+                 
+            cout << endl;
+        }
     }
     
     //clear ourself
@@ -64,7 +64,7 @@ public:
             case 'P' :
             case 'p' :  cout << "playing game" << endl;
                         myGrid.displayGrid();
-                       
+                        eStatus = GameStatus::EXITING;
                         break;
                         
             case 'E' :
@@ -86,7 +86,7 @@ public:
 private:
     GameStatus eStatus = GameStatus::MENU;
     char command;
-    gridClass myGrid;
+    Grid myGrid;
 };
 
 int main()
