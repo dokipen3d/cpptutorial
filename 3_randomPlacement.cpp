@@ -126,7 +126,7 @@ public:
                                 grid(inWidthHeight*inWidthHeight, 
                                 BattleShip::SeaItem(BattleShip::eShip::Sea))
                                 {
-                                    generator.seed(46);
+                                    generator.seed(42);
                                     placeShips(); 
                                 }
     
@@ -224,7 +224,7 @@ private:
         return x + y*widthHeight;
     }
     
-    int widthHeight = 8;
+    int widthHeight = 10;
     //important to specify namespace
     vector<BattleShip::SeaItem> grid;
     
@@ -282,7 +282,7 @@ private:
 
 int main()
 {
-    Game newGame(8);
+    Game newGame(10);
    
     
     cout << "exiting" << endl;
