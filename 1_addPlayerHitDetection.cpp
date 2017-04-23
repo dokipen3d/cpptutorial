@@ -237,15 +237,8 @@ public:
                         locationAtSea.orientation = orientationToSet;
                         locationAtSea.index = row;
                         locationAtSea.fromPos = coloumn;
-                        if(orientationToSet == BattleShip::eOrientation::VERTICAL){
-                            
-                            locationAtSea.toPos = row+shipLength;
-                        }
-                        else{
-                         
-                            locationAtSea.toPos = coloumn+shipLength;
-                        }
-                        cout << " " << row << " " << coloumn << " " << row+shipLength-1 << endl;
+                       
+                        cout << " " << row << " " << coloumn << " " << endl;
                         
 
                          tryToPlace = false;
