@@ -97,14 +97,7 @@ namespace BattleShip{
             return type;
         }
 
-        //hoist into SeaItem. not ideal as it's specific to ships but makes polymorphism easier
-           //later will get rid of these but for now ship keeps track of where it is.
-        eOrientation orientation;
-        //might be col or row depending on orientation 
-        int index;
-        //so we can search and count damage
-        int fromPos;
-        int toPos;
+       
     private:      
         
 
@@ -129,7 +122,16 @@ namespace BattleShip{
 
              return type;
         }
-
+            //could hoist into SeaItem but not ideal as it's specific to ships but makes polymorphism easier
+           //later will get rid of these but for now ship keeps track of where it is.
+           //this provides a good way to show dynamic cast? good way to intriduce pointers?
+           //or test if shit and make a local reference! yay references.
+        eOrientation orientation;
+        //might be col or row depending on orientation 
+        int index;
+        //so we can search and count damage
+        int fromPos;
+        int toPos;
      
          
     private:
@@ -173,8 +175,8 @@ public:
             //rand int for offset in range.
             //loop through positions and check it they are free (if they are all sea) use algo?
             //If free, loop through positions and place ship with map.first
-            auto timeSeed = chrono::high_resolution_clock::now().time_since_epoch().count();
-            generator.seed(timeSeed);
+            //auto timeSeed = chrono::high_resolution_clock::now().time_since_epoch().count();
+            generator.seed(rd());
             
             bool tryToPlace = true;
             int shipLength =  shipSize.second;
@@ -229,14 +231,14 @@ public:
                         int c = 0;
                         (orientationToSet == BattleShip::eOrientation::VERTICAL) ? r = i : c = i;
                         
-                        //set actual type using the first entry in the map (shiptype). not sure why setting it to an enum works
-                        //GET A REF!
-                        BattleShip::SeaItem& locationAtSea = grid[Convert2dTo1D(row+r,coloumn+c)];
+                        BattleShip::Ship newShip = BattleShip::Ship(shipSize.first);
+                        
+                        newShip.orientation = orientationToSet;
+                        newShip.index = row;
+                        newShip.fromPos = coloumn;
 
-                        locationAtSea = BattleShip::Ship(shipSize.first);
-                        locationAtSea.orientation = orientationToSet;
-                        locationAtSea.index = row;
-                        locationAtSea.fromPos = coloumn;
+                        grid[Convert2dTo1D(row+r,coloumn+c)] = newShip;
+
                        
                         cout << " " << row << " " << coloumn << " " << endl;
                         
@@ -267,7 +269,7 @@ private:
     vector<BattleShip::SeaItem> grid;
     
     //for random number generation
-
+    random_device rd;
     mt19937 generator; //seed with 0. can seed with  std::random_device rd;
     
     
