@@ -122,16 +122,12 @@ namespace BattleShip{
         
         virtual eShipStatus Hit() override{
              if(!bHit){
-                 cout << "im a ship!" << endl;
+                cout << "im a ship!" << endl;
                 bHit = true;
                 //store old type so that we can pass to checkSunk function because we are about to change it and that func will be checking me too
                 eShipStatus oldType = type;
                 type = eShipStatus::HIT;
-                if (parent.checkIfWholeShipSunk(oldType,  index,  fromPos, orientation)) {
-
-                    
-
-                }
+                
              }
 
              return type;
