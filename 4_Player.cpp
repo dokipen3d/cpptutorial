@@ -1,6 +1,6 @@
 #include "4_Player.h"  
-#include "4_BattleShipUtility.h"
 #include "4_Ship.h"
+
 
 using namespace std;
 //constructor
@@ -151,7 +151,7 @@ bool Player::AttemptHit(int posRow, int posCol) {
 //only pass a status as we create the pointer inside the function and move it in. hard pass around unique_ptrs
 void Player::addHitPositionToTrackingGrid(int posRow, int posCol, BattleShip::eShipStatus hitormiss ) {
 
-    enemyTrackingGrid[Convert2dTo1D(posRow, posCol)] = move(make_unique<BattleShip::Ship>(BattleShip::eShipStatus::HIT, this));
+    enemyTrackingGrid[Convert2dTo1D(posRow, posCol)] = move(make_unique<BattleShip::Ship>(hitormiss, this));
 
 }
 

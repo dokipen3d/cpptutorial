@@ -2,7 +2,7 @@
 
 
 #include <iostream>
-#include "4_BattleShipUtility.h"
+#include "4_BattleShipUtility.hpp"
 
 
 namespace BattleShip{
@@ -11,7 +11,7 @@ namespace BattleShip{
 
        
     public:
-        SeaItem(){};
+        SeaItem();
         SeaItem(eShipStatus shipType);
         
     

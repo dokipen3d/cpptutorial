@@ -1,7 +1,9 @@
 #pragma once
 
-#include "4_BattleShipUtility.h"
 #include "4_SeaItem.h"
+#include "4_BattleShipUtility.hpp"
+
+
 #include <vector>
 #include <memory>
 #include <random>

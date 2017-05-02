@@ -1,7 +1,7 @@
 #include <iostream>
 #include "4_Player.h"
 #include "4_SeaItem.h"
-#include "4_BattleShipUtility.h"
+#include "4_BattleShipUtility.hpp"
 
 
 //http://en.cppreference.com/w/cpp/language/operators
@@ -65,6 +65,7 @@ public:
            
 
             if(AI.AttemptHit(a,b)) {
+                std::cout << "attempted hit" << std::endl;
                 me.addHitPositionToTrackingGrid(a, b,
                  BattleShip::eShipStatus::HIT);
             }
