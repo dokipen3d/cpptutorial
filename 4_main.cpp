@@ -63,9 +63,9 @@ public:
             std::cin >> a >> b;
 
            
-
+            std::cout << "about to attempt hit" << std::endl;
             if(AI.AttemptHit(a,b)) {
-                std::cout << "attempted hit" << std::endl;
+                
                 me.addHitPositionToTrackingGrid(a, b,
                  BattleShip::eShipStatus::HIT);
             }

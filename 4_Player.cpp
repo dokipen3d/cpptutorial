@@ -136,6 +136,9 @@ bool Player::AttemptHit(int posRow, int posCol) {
     BattleShip::SeaItem* item = grid[Convert2dTo1D(posRow, posCol)].get();
     BattleShip::eShipStatus attempt = item->Hit();
 
+
+    //alternative call
+    //grid[Convert2dTo1D(posRow, posCol)].get()->Hit()
     if (attempt == BattleShip::eShipStatus::HIT) {
         
         cout << "HIT" << endl;
@@ -159,7 +162,7 @@ void Player::addHitPositionToTrackingGrid(int posRow, int posCol, BattleShip::eS
 bool Player::checkIfWholeShipSunk(BattleShip::eShipStatus type, int row, int coloumn, BattleShip::eOrientation orientation) {
 
     int shipLength = BattleShip::shipSize[type]; 
-
+    std::cout << "shipSize is  " << shipLength<< endl;
     if(orientation == BattleShip::eOrientation::VERTICAL){
                 swap(row, coloumn);
             }
@@ -169,7 +172,7 @@ bool Player::checkIfWholeShipSunk(BattleShip::eShipStatus type, int row, int col
         int r = 0;
         int c = 0;
         (orientation == BattleShip::eOrientation::VERTICAL) ? r = i : c = i;
-        
+        std::cout << "checking " << row+r << " and " << coloumn+c << endl;
         if (grid[Convert2dTo1D(row+r,coloumn+c)]->Type() != BattleShip::eShipStatus::HIT){
             return false;
         }
