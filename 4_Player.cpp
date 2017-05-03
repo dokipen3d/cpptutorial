@@ -12,9 +12,6 @@ Player::Player(int inWidthHeight) :     widthHeight(inWidthHeight),
                                 enemyTrackingGrid(  inWidthHeight*inWidthHeight
                                                     )
                                 {
-                                
-                                    
-
                                     for (auto& ptr : grid){
                                         ptr = move(make_unique<BattleShip::SeaItem>());
                                     }
@@ -84,6 +81,8 @@ void Player::placeShips(){
 
             if(orientationToSet == BattleShip::eOrientation::VERTICAL){
                 swap(row, coloumn);
+                    
+
             }
             //so we can break inner for loop (used in condition)
             bool bStartAgain = false;
@@ -163,9 +162,7 @@ bool Player::checkIfWholeShipSunk(BattleShip::eShipStatus type, int row, int col
 
     int shipLength = BattleShip::shipSize[type]; 
     std::cout << "shipSize is  " << shipLength<< endl;
-    if(orientation == BattleShip::eOrientation::VERTICAL){
-                swap(row, coloumn);
-            }
+    //here we fixed a bug. we were swapping the row and coloumn, forgetting that we had already swapped the, before.
 
     for (int i = 0; i < shipLength; ++i){
         //change if we add to row or col
