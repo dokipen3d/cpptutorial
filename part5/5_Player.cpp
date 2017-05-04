@@ -3,6 +3,8 @@
 
 
 using namespace std;
+using namespace BattleShip;
+
 //constructor
 //now have to initialize vector with a new SeaItem and not 0
 Player::Player(int inWidthHeight) :     widthHeight(inWidthHeight), 
@@ -44,13 +46,11 @@ void Player::displayGrid(){
 
 void Player::placeShips(){
     
-
-    for (auto& shipSize : BattleShip::shipSize){ //loop through map
+    for (auto& currentShipSize : BattleShip::shipSize){ //loop through map
         
         generator.seed(rd());
-        
 
-        int shipLength =  shipSize.second;
+        int shipLength =  currentShipSize.second;
         int row = 0;
         int coloumn = 0;
 
@@ -62,9 +62,9 @@ void Player::placeShips(){
 
         auto orientationToSet = [&](){
             if ((pickFromRangeBool(generator) > 0)) {
-                return BattleShip::eOrientation::VERTICAL;
+                return eOrientation::VERTICAL;
             }
-            return BattleShip::eOrientation::HORIZONTAL;
+            return eOrientation::HORIZONTAL;
         }();
 
         bool tryToPlace = true;     
@@ -75,33 +75,23 @@ void Player::placeShips(){
 
             auto gridRange = [&]() -> BattleShip::GridRange { 
                 switch (orientationToSet) {
-                    case BattleShip::eOrientation::VERTICAL:
-                        return {
-                            {row, coloumn}, 
-                            {row+shipLength, coloumn}
-                        };
-                    case BattleShip::eOrientation::HORIZONTAL:
-                        return  {
-                            {coloumn, row}, 
-                            {coloumn, row+shipLength}
-                        };
+                    case eOrientation::VERTICAL:
+                        return {{row, coloumn}, {row+shipLength, coloumn}};
+                    case eOrientation::HORIZONTAL:
+                        return  {{coloumn, row}, {coloumn, row+shipLength}};
                 }
             }();
-
-            // if(orientationToSet == BattleShip::eOrientation::VERTICAL){
-            //     swap(row, coloumn);
-            // }
-            //so we can break inner for loop (used in condition)
             bool bStartAgain = false;
+
+            ////HERE WE WILL ADD RANGE LOOPING
             
             for (int i = 0; (i < shipLength) && !bStartAgain; ++i){
-                
-                //change if we add to row or col
+
                 int r = 0;
                 int c = 0;
-                (orientationToSet == BattleShip::eOrientation::VERTICAL) ? r = i : c = i;
-                BattleShip::eShipStatus testShip = grid[Convert2dTo1D(row+r,coloumn+c)]->Type();
-                if (testShip != BattleShip::eShipStatus::Sea){
+                (orientationToSet == eOrientation::VERTICAL) ? r = i : c = i;
+                eShipStatus testShip = grid[Convert2dTo1D(row+r,coloumn+c)]->Type();
+                if (testShip != eShipStatus::Sea){
                     bStartAgain = true;
                     break;
                 }
@@ -110,12 +100,11 @@ void Player::placeShips(){
             //if we dont have to start again loop through ship and place!
             if (!bStartAgain){
                     for (int i = 0; i < shipLength; ++i){
-                    //change if we add to row or col
                     int r = 0;
                     int c = 0;
-                    (orientationToSet == BattleShip::eOrientation::VERTICAL) ? r = i : c = i;
+                    (orientationToSet == eOrientation::VERTICAL) ? r = i : c = i;
                     
-                    auto newShipPtr = make_unique<BattleShip::Ship>(shipSize.first, this);
+                    auto newShipPtr = make_unique<Ship>(currentShipSize.first, this);
                     
                     newShipPtr->orientation = orientationToSet;
                     newShipPtr->index = row;
