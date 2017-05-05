@@ -94,10 +94,6 @@ void Player::placeShips()
                      gridRange.Current() != gridRange.End(); gridRange.Bump()) {
 
                     auto newShipPtr = make_unique<Ship>(currentShipSize.first, this);
-
-                    newShipPtr->orientation = orientationToSet;
-                    newShipPtr->index = initialOffset;
-                    newShipPtr->fromPos = secondaryShift;
                     newShipPtr->gridRange = gridRange;
 
                     grid[Convert2dTo1D(gridRange.Current().x, gridRange.Current().y)] = move(newShipPtr);
