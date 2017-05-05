@@ -1,5 +1,5 @@
-#include "4_Ship.h"
-#include "4_Player.h"
+#include "Ship.h"
+#include "Player.h"
 #include <iostream>
 
 

@@ -1,7 +1,7 @@
 #include <iostream>
-#include "5_Player.h"
-#include "5_SeaItem.h"
-#include "5_BattleShipUtility.hpp"
+#include "Player.h"
+#include "SeaItem.h"
+#include "BattleShipUtility.hpp"
 
 
 //http://en.cppreference.com/w/cpp/language/operators

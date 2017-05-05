@@ -1,7 +1,7 @@
 #pragma once
 
-#include "5_SeaItem.h"
-#include "5_BattleShipUtility.hpp"
+#include "SeaItem.h"
+#include "BattleShipUtility.hpp"
 
 
 #include <vector>

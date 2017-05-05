@@ -1,4 +1,4 @@
-#include "4_SeaItem.h"
+#include "SeaItem.h"
 #include <iostream>
 
 namespace BattleShip{

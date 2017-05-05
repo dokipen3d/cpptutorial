@@ -2,7 +2,7 @@
 
 
 #include <iostream>
-#include "4_BattleShipUtility.hpp"
+#include "BattleShipUtility.hpp"
 
 
 namespace BattleShip{
