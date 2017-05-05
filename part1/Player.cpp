@@ -81,7 +81,6 @@ void Player::placeShips()
                 eShipStatus testShip = grid[Convert2dTo1D(gridRange.Current().x, gridRange.Current().y)]
                                            ->Type();
 
-                std::cout << gridRange.Current().x << " " << gridRange.Current().y << "/n";
                 if (testShip != eShipStatus::Sea) {
                     bStartAgain = true;
                     break;
@@ -99,10 +98,11 @@ void Player::placeShips()
                     newShipPtr->orientation = orientationToSet;
                     newShipPtr->index = initialOffset;
                     newShipPtr->fromPos = secondaryShift;
+                    newShipPtr->gridRange = gridRange;
 
                     grid[Convert2dTo1D(gridRange.Current().x, gridRange.Current().y)] = move(newShipPtr);
-                    tryToPlace = false;
                 }
+                tryToPlace = false;
             }
         } // end while
     }
@@ -134,22 +134,17 @@ void Player::addHitPositionToTrackingGrid(int posRow, int posCol,
 }
 
 // we can pass a ship because only ships will be calling this
-bool Player::checkIfWholeShipSunk(BattleShip::eShipStatus type, int row,
-    int coloumn,
-    BattleShip::eOrientation orientation)
-{
-    int shipLength = BattleShip::shipSize[type];
-    std::cout << "shipSize is  " << shipLength << endl;
-    // here we fixed a bug. we were swapping the row and coloumn, forgetting
-    // that we had already swapped the, before.
+bool Player::checkIfWholeShipSunk(GridRange gridRange)
 
-    for (int i = 0; i < shipLength; ++i) {
-        // change if we add to row or col
-        int r = 0;
-        int c = 0;
-        (orientation == BattleShip::eOrientation::VERTICAL) ? r = i : c = i;
-        std::cout << "checking " << row + r << " and " << coloumn + c << endl;
-        if (grid[Convert2dTo1D(row + r, coloumn + c)]->Type() != BattleShip::eShipStatus::HIT) {
+
+{
+
+        
+    for (gridRange.Begin();
+         gridRange.Current() != gridRange.End(); gridRange.Bump()) {
+        
+        std::cout << "checking " << gridRange.Current().x << " and " << gridRange.Current().y << endl;
+        if (grid[Convert2dTo1D(gridRange.Current().x, gridRange.Current().y)]->Type() != BattleShip::eShipStatus::HIT) {
             return false;
         }
     }

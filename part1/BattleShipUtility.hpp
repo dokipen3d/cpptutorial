@@ -73,7 +73,7 @@ struct GridRange {
     GridRange(int initialOffset, int secondaryOffset, int shipLength,
         eOrientation orientation)
         : begin{ initialOffset, secondaryOffset }
-        , end{ initialOffset , secondaryOffset + shipLength}
+        , end{ initialOffset, secondaryOffset + shipLength }
         , direction{ 0, 1 }
     {
         if (orientation == eOrientation::HORIZONTAL) {
@@ -83,30 +83,40 @@ struct GridRange {
         }
     }
 
+    // a 'typedef' for the direction the range should travel through VERT/HOR.
+    // compatible with Position adding
+    using Direction = Position;
+
+    Position Dir() const
+    {
+        return direction;
+    }
+
     Position Begin()
     {
         current = begin;
         return begin;
     }
 
-    Position End()
+    Position Start() const
+    {
+        return begin;
+    }
+
+    Position End() const
     {
         return end;
     }
 
     void Bump()
-    {        
+    {
         current += direction;
     }
 
-    Position Current()
+    Position Current() const
     {
         return current;
     }
-
-    // a 'typedef' for the direction the range should travel through VERT/HOR.
-    // compatible with Position adding
-    using Direction = Position;
 
     Position begin{ 0, 0 };
     Position end{ 0, 0 };

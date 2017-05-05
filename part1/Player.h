@@ -30,7 +30,7 @@ public:
     void addHitPositionToTrackingGrid(int posRow, int posCol, BattleShip::eShipStatus hitormiss );
 
     //we can pass a ship because only ships will be calling this
-    bool checkIfWholeShipSunk(BattleShip::eShipStatus type, int row, int coloumn, BattleShip::eOrientation orientation);
+    bool checkIfWholeShipSunk(BattleShip::GridRange gridRange);
 
 private:
     //we know the width so can just take an x and y
