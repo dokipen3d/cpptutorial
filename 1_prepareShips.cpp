@@ -26,10 +26,12 @@ namespace BattleShip{
         Cruiser,
         Submarine,
         Destroyer,
-        Sea
+        Sea // <--- kind of like 'no ship'. this is the void or monostate of the group. 
     };
     
-    //map to get ship size based on type
+    //map to get ship size based on type 
+    // right now these maps are our way of storing the game rules. in the future it might be nice to read in as files 
+    // and not hard code into our code.
     map<eShip, int> shipSize{
         {eShip::Carrier, 5},
         {eShip::Battleship, 4},
@@ -48,6 +50,7 @@ namespace BattleShip{
     };
     
     //display character
+    // this is the 'graphics' for our game. like sprites
     map<eShip, char> shipDisplayIcon{
         {eShip::Carrier, 'C'},
         {eShip::Battleship, 'B'},
@@ -82,6 +85,8 @@ namespace BattleShip{
     };
     
     //first we are filling each position with a ship. naive
+    // having multiple ships in a line on the grid to represent the same ship is simple but practical.
+    // they dont communicate together as one ship
     class Ship : SeaItem{
     public:
         Ship(eShip shipType)  : SeaItem(shipType){}
@@ -97,8 +102,10 @@ namespace BattleShip{
         //might be col or row depending on orientation 
         int index;
         //so we can search and count damage
+        //  this is how the ships knows where the other ones are. duplication of data though.
         int fromPos;
         int toPos;
+        // individual to this part of the ship.
         bool Damaged;
     };
 }
